@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Configurações - CAA Board</title>
+  <!-- FontAwesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts: Nunito for friendly, rounded, accessible text -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/dark-theme.css">
+</head>
+
+<body>
+  <script>
+    if (localStorage.getItem('caa_theme') === 'dark') {
+      document.body.classList.add('dark-mode');
+    }
+  </script>
+  <header class="app-header">
+    <div class="header-content">
+      <div class="header-logo" title="Comunicação Aumentativa e Alternativa">
+        <h1>
+          <a href="index.html"><i class="fa-solid fa-person"></i> CAA Board</a>
+        </h1>
+      </div>
+      <nav id="navMenu">
+        <!-- Navigation inserted via JS -->
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="flash-messages" id="flashMessages"></div>
+
+    <div class="settings-container">
+      <div class="header-with-back">
+        <a href="index.html" class="btn btn-outline btn-back"><i class="fa-solid fa-arrow-left"></i> Voltar ao Board</a>
+        <h2>Configurações do Meu Board</h2>
+      </div>
+
+      <!-- Add New Card Module -->
+      <div class="settings-panel add-card-panel">
+        <h3><i class="fa-solid fa-plus-circle"></i> Criar Novo Card</h3>
+        <form id="addCardForm" enctype="multipart/form-data">
+          <input type="hidden" name="action" value="add_card">
+
+          <div class="form-group">
+            <label for="word">Palavra ou Expressão (Máx 2 palavras)</label>
+            <input type="text" id="word" name="word" required placeholder="Ex: Meu Brinquedo" id="wordInput">
+            <small id="wordHelp" class="help-text">Duas palavras permitidas.</small>
+          </div>
+
+          <div class="form-group">
+            <label>Escolha um Ícone</label>
+            <div class="icon-selector">
+              <input type="hidden" name="icon" id="selectedIcon" value="">
+              <div class="icon-grid" id="iconGrid">
+                <i class="fa-solid fa-star icon-option" data-icon="fa-solid fa-star"></i>
+                <i class="fa-solid fa-heart icon-option" data-icon="fa-solid fa-heart"></i>
+                <i class="fa-solid fa-car icon-option" data-icon="fa-solid fa-car"></i>
+                <i class="fa-solid fa-bus icon-option" data-icon="fa-solid fa-bus"></i>
+                <i class="fa-solid fa-plane icon-option" data-icon="fa-solid fa-plane"></i>
+                <i class="fa-solid fa-bicycle icon-option" data-icon="fa-solid fa-bicycle"></i>
+                <i class="fa-solid fa-dog icon-option" data-icon="fa-solid fa-dog"></i>
+                <i class="fa-solid fa-cat icon-option" data-icon="fa-solid fa-cat"></i>
+                <i class="fa-solid fa-fish icon-option" data-icon="fa-solid fa-fish"></i>
+                <i class="fa-solid fa-bug icon-option" data-icon="fa-solid fa-bug"></i>
+                <i class="fa-solid fa-bone icon-option" data-icon="fa-solid fa-bone"></i>
+                <i class="fa-solid fa-house icon-option" data-icon="fa-solid fa-house"></i>
+                <i class="fa-solid fa-tree icon-option" data-icon="fa-solid fa-tree"></i>
+                <i class="fa-solid fa-leaf icon-option" data-icon="fa-solid fa-leaf"></i>
+                <i class="fa-solid fa-sun icon-option" data-icon="fa-solid fa-sun"></i>
+                <i class="fa-solid fa-moon icon-option" data-icon="fa-solid fa-moon"></i>
+                <i class="fa-solid fa-cloud icon-option" data-icon="fa-solid fa-cloud"></i>
+                <i class="fa-solid fa-umbrella icon-option" data-icon="fa-solid fa-umbrella"></i>
+                <i class="fa-solid fa-fire icon-option" data-icon="fa-solid fa-fire"></i>
+                <i class="fa-solid fa-droplet icon-option" data-icon="fa-solid fa-droplet"></i>
+                <i class="fa-solid fa-book-open icon-option" data-icon="fa-solid fa-book-open"></i>
+                <i class="fa-solid fa-pen icon-option" data-icon="fa-solid fa-pen"></i>
+                <i class="fa-solid fa-paintbrush icon-option" data-icon="fa-solid fa-paintbrush"></i>
+                <i class="fa-solid fa-scissors icon-option" data-icon="fa-solid fa-scissors"></i>
+                <i class="fa-solid fa-music icon-option" data-icon="fa-solid fa-music"></i>
+                <i class="fa-solid fa-gamepad icon-option" data-icon="fa-solid fa-gamepad"></i>
+                <i class="fa-solid fa-futbol icon-option" data-icon="fa-solid fa-futbol"></i>
+                <i class="fa-solid fa-basketball icon-option" data-icon="fa-solid fa-basketball"></i>
+                <i class="fa-solid fa-bed icon-option" data-icon="fa-solid fa-bed"></i>
+                <i class="fa-solid fa-shirt icon-option" data-icon="fa-solid fa-shirt"></i>
+                <i class="fa-solid fa-shoe-prints icon-option" data-icon="fa-solid fa-shoe-prints"></i>
+                <i class="fa-solid fa-apple-whole icon-option" data-icon="fa-solid fa-apple-whole"></i>
+                <i class="fa-solid fa-pizza-slice icon-option" data-icon="fa-solid fa-pizza-slice"></i>
+                <i class="fa-solid fa-hamburger icon-option" data-icon="fa-solid fa-hamburger"></i>
+                <i class="fa-solid fa-ice-cream icon-option" data-icon="fa-solid fa-ice-cream"></i>
+                <i class="fa-solid fa-mug-hot icon-option" data-icon="fa-solid fa-mug-hot"></i>
+                <i class="fa-solid fa-camera icon-option" data-icon="fa-solid fa-camera"></i>
+                <i class="fa-solid fa-gift icon-option" data-icon="fa-solid fa-gift"></i>
+                <i class="fa-solid fa-bell icon-option" data-icon="fa-solid fa-bell"></i>
+                <i class="fa-solid fa-key icon-option" data-icon="fa-solid fa-key"></i>
+                <i class="fa-solid fa-lightbulb icon-option" data-icon="fa-solid fa-lightbulb"></i>
+                <i class="fa-solid fa-crown icon-option" data-icon="fa-solid fa-crown"></i>
+                <i class="fa-solid fa-gem icon-option" data-icon="fa-solid fa-gem"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top: 15px;">
+            <label for="image_upload">Ou Envie uma Imagem (PNG, JPG, ICO - Máx 500KB, 300x300px)</label>
+            <input type="file" id="image_upload" name="image_upload"
+              accept=".png, .jpg, .jpeg, .ico, image/png, image/jpeg, image/x-icon"
+              style="padding: 10px; width: 100%; border: 2px dashed var(--primary-color); border-radius: 8px;">
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block" id="btnSubmitCard" disabled>Adicionar e
+            Salvar</button>
+        </form>
+      </div>
+
+      <!-- Board Miniature Module -->
+      <div class="settings-panel miniature-panel mt-4">
+        <h3><i class="fa-solid fa-chess-board"></i> Miniatura do Board</h3>
+        <p class="help-text" style="margin-bottom: 15px;">Arraste os cards para reorganizar seu painel principal.</p>
+
+        <div class="miniature-grid" id="miniatureGrid">
+          <!-- Miniature cards generated by JS -->
+        </div>
+        <div id="saveAlert" class="flash"
+          style="display: none; position: fixed; bottom: 20px; right: 20px; z-index: 1000; background-color: var(--success-color); color: #333; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+          Ordem do board salva com sucesso!
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+  <script src="./js/common.js"></script>
+  <script src="./js/settings.js"></script>
+</body>
+
+</html>

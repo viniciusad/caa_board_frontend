@@ -1,0 +1,89 @@
+body.dark-mode {
+    --primary-color: #007acc;
+    --secondary-color: #4CAF50;
+    --accent-color: #d7ba7d;
+    --danger-color: #f14c4c;
+    --warning-color: #cca700;
+    --success-color: #89d185;
+    --bg-color: #1e1e1e;
+    --panel-bg: #252526;
+    --text-main: #cccccc;
+    --text-muted: #858585;
+    --verb-bg: #1e3a1e;
+    --verb-border: #2ea043;
+    --noun-bg: #3c341b;
+    --noun-border: #d29922;
+    --conn-bg: #1f2a3c;
+    --conn-border: #388bfd;
+}
+body.dark-mode .app-header {
+    background-color: #333333;
+    border-bottom: 1px solid #454545;
+    box-shadow: none;
+}
+body.dark-mode .form-group input {
+    background-color: #3c3c3c;
+    color: #cccccc;
+    border-color: #555555;
+}
+body.dark-mode .form-group input:focus {
+    border-color: var(--primary-color);
+}
+body.dark-mode .badge-default {
+    background-color: #333333;
+    color: #cccccc;
+}
+body.dark-mode .badge-custom {
+    background-color: #0e293f;
+    color: #4daafc;
+}
+body.dark-mode .settings-card-row {
+    background-color: #2d2d30;
+    border-color: #454545;
+}
+body.dark-mode .settings-card-row.is-hidden {
+    background-color: #1e1e1e;
+    border-color: #333333;
+    opacity: 0.5;
+}
+body.dark-mode .btn-outline {
+    border-color: #555555;
+    color: #cccccc;
+}
+body.dark-mode .btn-outline:hover {
+    background-color: #555555;
+    color: #ffffff;
+}
+body.dark-mode .sequence-bar-wrapper {
+    background-color: #252526;
+    border-color: #454545;
+    box-shadow: 0 -20px 0 0 var(--bg-color), 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+body.dark-mode .sequence-item {
+    background-color: #3c3c3c;
+    border-color: #555555;
+    color: #cccccc;
+}
+body.dark-mode .miniature-grid {
+    background-color: #1e1e1e;
+    border-color: #454545;
+}
+body.dark-mode .type-custom {
+    background-color: #2d2033;
+    border-color: #bc8cff;
+}
+body.dark-mode .sortable-ghost {
+    background-color: #0e293f;
+    border-color: var(--primary-color);
+}
+body.dark-mode .icon-option {
+    border-color: #454545;
+}
+body.dark-mode .icon-option:hover {
+    background-color: #333333;
+}
+body.dark-mode .icon-option.active {
+    background-color: #0e293f;
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}

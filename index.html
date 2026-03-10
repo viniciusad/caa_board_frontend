@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Board CAA</title>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Nunito for friendly, rounded, accessible text -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/dark-theme.css">
+</head>
+<body>
+    <script>
+        if (localStorage.getItem('caa_theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+        }
+    </script>
+    <header class="app-header">
+        <div class="header-content">
+            <div class="header-logo" title="Comunicação Aumentativa e Alternativa">
+                <h1>
+                    <a href="index.html"><i class="fa-solid fa-person"></i> CAA Board</a>
+                </h1>
+            </div>
+            <nav id="navMenu">
+                <!-- Navigation inserted via JS -->
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="flash-messages" id="flashMessages"></div>
+
+        <div class="board-container">
+            <!-- Sequence Bar -->
+            <div class="sequence-bar-wrapper">
+                <div class="sequence-bar" id="sequenceBar">
+                    <div class="placeholder-text">Clique nos cards para formar uma frase...</div>
+                </div>
+                <div class="sequence-controls">
+                    <button id="btnDelete" class="control-btn btn-danger" title="Apagar último"><i class="fa-solid fa-delete-left"></i></button>
+                    <button id="btnClear" class="control-btn btn-warning" title="Limpar tudo"><i class="fa-solid fa-trash-can"></i></button>
+                    <button id="btnPlay" class="control-btn btn-success" title="Falar"><i class="fa-solid fa-circle-play"></i> Falar</button>
+                </div>
+            </div>
+
+            <!-- Cards Grid -->
+            <div class="cards-grid" id="cardsGrid">
+                <!-- Cards will be populated by JS -->
+            </div>
+        </div>
+    </main>
+
+    <script src="./js/common.js"></script>
+    <script src="./js/main.js"></script>
+</body>
+</html>

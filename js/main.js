@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnDelete = document.getElementById('btnDelete');
   const btnClear = document.getElementById('btnClear');
   const btnPlay = document.getElementById('btnPlay');
+  const searchInput = document.getElementById('sequenceSearchInput');
 
   let sequence = [];
   const MAX_CARDS = 10;
@@ -79,6 +80,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         sequence.push({ word: item.word, icon: item.icon_class });
         renderSequence();
+        resetSearch();
+        if (searchInput) {
+          searchInput.focus();
+        }
       });
 
       cardsGrid.appendChild(cardEl);
@@ -86,12 +91,24 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function renderSequence() {
+    // We only clear the items, we need to preserve the placeholder or input if applicable.
+    // Instead of innerHTML = '', we will remove all .sequence-item elements.
+    const existingItems = sequenceBar.querySelectorAll('.sequence-item');
+    existingItems.forEach(item => item.remove());
+
+    const placeholder = sequenceBar.querySelector('.placeholder-text');
+
     if (sequence.length === 0) {
-      sequenceBar.innerHTML = '<div class="placeholder-text">Clique nos cards para formar uma frase...</div>';
+      if (placeholder) placeholder.style.display = 'block';
+      if (searchInput) {
+        searchInput.style.display = 'none';
+        searchInput.value = '';
+      }
       return;
     }
 
-    sequenceBar.innerHTML = '';
+    if (placeholder) placeholder.style.display = 'none';
+    if (searchInput) searchInput.style.display = 'block';
     sequence.forEach((item, index) => {
       const el = document.createElement('div');
       el.className = 'sequence-item';
@@ -104,11 +121,33 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       el.innerHTML = `${iconHtml} ${item.word}`;
-      el.onclick = () => {
+      el.onclick = (e) => {
+        e.stopPropagation(); // Prevent focusing input when clicking an item
         sequence.splice(index, 1);
         renderSequence();
+        resetSearch();
       };
-      sequenceBar.appendChild(el);
+      // Insert before the input field if it exists
+      if (searchInput) {
+        sequenceBar.insertBefore(el, searchInput);
+      } else {
+        sequenceBar.appendChild(el);
+      }
+    });
+
+    // Make sure input is visible if there are sequence items
+    if (searchInput && sequence.length > 0) {
+      searchInput.style.display = 'block';
+    }
+  }
+
+  function resetSearch() {
+    if (!searchInput) return;
+    searchInput.value = '';
+    const cards = cardsGrid.querySelectorAll('.card');
+    cards.forEach(card => {
+      card.style.display = 'flex';
+      card.classList.remove('selected');
     });
   }
 
@@ -155,7 +194,16 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   document.addEventListener('keydown', (e) => {
+    // Top priority shortcut: Ctrl + Enter to speak
+    if (e.ctrlKey && e.key === 'Enter') {
+      e.preventDefault();
+      if (btnPlay) btnPlay.click();
+      return;
+    }
+
+    // Only intercept body/document level backspace/enter if NOT in an input
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
     if (e.key === 'Enter') {
       e.preventDefault();
       if (btnPlay) btnPlay.click();
@@ -164,6 +212,76 @@ document.addEventListener('DOMContentLoaded', () => {
       if (btnDelete) btnDelete.click();
     }
   });
+
+  if (sequenceBar && searchInput) {
+    sequenceBar.addEventListener('click', () => {
+      searchInput.focus();
+    });
+
+    searchInput.addEventListener('input', (e) => {
+      const searchTerm = e.target.value.toLowerCase().trim();
+      const cards = Array.from(cardsGrid.querySelectorAll('.card'));
+      let firstVisible = null;
+
+      cards.forEach(card => {
+        card.classList.remove('selected');
+        const word = card.getAttribute('data-word').toLowerCase();
+        if (word.includes(searchTerm)) {
+          card.style.display = 'flex';
+          if (!firstVisible) {
+            firstVisible = card;
+          }
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      if (firstVisible && searchTerm !== '') {
+        firstVisible.classList.add('selected');
+      }
+    });
+
+    searchInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        if (e.ctrlKey) {
+          return;
+        }
+
+        e.preventDefault();
+        const selected = cardsGrid.querySelector('.card.selected');
+        if (selected) {
+          selected.click();
+        } else if (e.target.value.trim() !== '') {
+          sequenceBar.style.backgroundColor = '#FFD2D2';
+          setTimeout(() => sequenceBar.style.backgroundColor = '', 300);
+        }
+      } else if (e.key === 'Tab') {
+        e.preventDefault();
+        const visibleCards = Array.from(cardsGrid.querySelectorAll('.card')).filter(card => card.style.display !== 'none');
+        if (visibleCards.length === 0) return;
+
+        const currentIndex = visibleCards.findIndex(card => card.classList.contains('selected'));
+        let nextIndex = 0;
+
+        if (currentIndex !== -1) {
+          visibleCards[currentIndex].classList.remove('selected');
+          nextIndex = (currentIndex + 1) % visibleCards.length;
+        }
+
+        const nextCard = visibleCards[nextIndex];
+        nextCard.classList.add('selected');
+        nextCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+      } else if (e.key === 'Backspace' && e.target.value === '') {
+        e.preventDefault();
+        if (btnDelete) btnDelete.click();
+      }
+    });
+
+    searchInput.addEventListener('blur', () => {
+      const selected = cardsGrid.querySelector('.card.selected');
+    });
+  }
 
   // Initial load
   if (cardsGrid) {

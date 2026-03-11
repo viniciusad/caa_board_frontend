@@ -72,6 +72,20 @@ body {
     padding: 0 20px;
 }
 
+.auth-container {
+    background-color: var(--panel-bg);
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+}
+
+.auth-container h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
 .btn {
     display: inline-block;
     padding: 10px 20px;
@@ -228,8 +242,23 @@ body {
     color: var(--text-muted);
     font-style: italic;
     font-size: 1.1rem;
-    width: 100%;
-    text-align: center;
+}
+
+.sequence-search-input {
+    background: transparent;
+    border: none;
+    outline: none;
+    flex-grow: 1;
+    min-width: 150px;
+    font-size: 1.2rem;
+    font-family: inherit;
+    color: var(--text-main);
+    padding: 8px 0;
+}
+
+.sequence-search-input::placeholder {
+    color: var(--text-muted);
+    font-style: italic;
 }
 
 .sequence-controls {
@@ -239,7 +268,7 @@ body {
     gap: 10px;
     border-left: 2px dashed #E0E0E0;
     padding-left: 15px;
-    min-width: 120px;
+    min-width: 180px;
 }
 
 .control-btn {
@@ -339,6 +368,12 @@ body {
 
 .card:active {
     transform: scale(0.95);
+}
+
+.card.selected {
+    box-shadow: 0 0 0 4px var(--primary-color), 0 8px 15px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+    z-index: 10;
 }
 
 .card-icon {

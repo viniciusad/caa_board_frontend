@@ -67,7 +67,7 @@ function renderNav() {
     // Prevent showing login/register if already on those pages
     const currentPath = window.location.pathname;
     if (!currentPath.endsWith('login.html')) {
-      html += `<a href="login.html" class="btn">Entrar</a>`;
+      html += `<a href="login.html" class="btn btn-outline">Entrar</a>`;
     }
     if (!currentPath.endsWith('register.html')) {
       html += `<a href="register.html" class="btn btn-outline">Registrar</a>`;
